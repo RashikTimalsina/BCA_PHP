@@ -1,8 +1,8 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', 'CLEB2d@mysql', 'bca'); 
+$conn = mysqli_connect('localhost', 'root', '', 'bca');  // Updated password to an empty string
 
 if (!$conn) {
-    die("Database connection failed: " . mysqli_connect_error()); 
+    die("Database connection failed: " . mysqli_connect_error());
 }
 
 // Checking if the student ID is provided in the URL

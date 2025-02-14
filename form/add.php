@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', 'CLEB2d@mysql', 'bca');
+$conn = mysqli_connect('localhost', 'root', '', 'bca');  // Updated password to an empty string
 
 if (!$conn) {
     die("Database connected failed: " . mysqli_connect_error());
@@ -10,8 +10,8 @@ if (!empty($_POST)) {
     $address = $_POST['address'];
     $email = $_POST['email'];
 
-   $sql = "INSERT INTO students (name, email, address) VALUES ('$name', '$email', '$address')";
-     $result = mysqli_query($conn, $sql);
+    $sql = "INSERT INTO students (name, email, address) VALUES ('$name', '$email', '$address')";
+    $result = mysqli_query($conn, $sql);
     if ($result) {
         echo "Recorded";
     } else {

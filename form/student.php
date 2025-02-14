@@ -1,13 +1,11 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', 'CLEB2d@mysql', 'bca');
+$conn = mysqli_connect('localhost', 'root', '', 'bca'); // Updated password to an empty string
 
 if (!$conn) {
-    echo "Database connected";
+    die("Database connection failed: " . mysqli_connect_error()); // Corrected error handling
 }
 $sql = "SELECT * FROM students";
 $result = mysqli_query($conn, $sql);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -31,8 +29,11 @@ $result = mysqli_query($conn, $sql);
                     <th>Name</th>
                     <th>Email</th>
                     <th>Address</th>
+                    <th>Actions</th>
                 </tr>
-                <?php foreach ($result as $students) { ?>
+            </thead>
+            <tbody>
+                <?php while ($students = mysqli_fetch_assoc($result)) { ?>
                     <tr>
                         <td><?= $students['id'] ?></td>
                         <td><?= $students['name'] ?></td>
@@ -44,7 +45,7 @@ $result = mysqli_query($conn, $sql);
                         </td>
                     </tr>
                 <?php } ?>
-            </thead>
+            </tbody>
         </table>
     </blockquote>
 </body>
