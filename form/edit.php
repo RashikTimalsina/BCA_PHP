@@ -5,13 +5,16 @@ if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
 
+
 // Checking if the student ID is provided in the URL or not
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
+
     // Fetching the existing student record from the database
     $sql = "SELECT * FROM students WHERE id = $id";
     $result = mysqli_query($conn, $sql);
+
 
     // Checking if the student record exists
     if (mysqli_num_rows($result) > 0) {
@@ -28,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $address = $_POST['address'];
+
 
     // Update the record in the database
     $updateSql = "UPDATE students SET name = '$name', email = '$email', address = '$address' WHERE id = $id";
@@ -57,13 +61,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <hr>
         <form action="" method="post">
             <label for="name">Name</label> <br>
-            <input type="text" name="name" value="<?php echo htmlspecialchars($student['name']); ?>" required> <br>
+            <input type="text" name="name" value="<?php echo htmlentities($student['name']); ?>" required> <br>
 
             <label for="email">Email</label> <br>
-            <input type="text" name="email" value="<?php echo htmlspecialchars($student['email']); ?>" required> <br>
+            <input type="text" name="email" value="<?php echo htmlentities($student['email']); ?>" required> <br>
 
             <label for="address">Address</label> <br>
-            <input type="text" name="address" value="<?php echo htmlspecialchars($student['address']); ?>" required> <br>
+            <input type="text" name="address" value="<?php echo htmlentities($student['address']); ?>" required> <br>
             <br>
             <button type="submit">Update Record</button>
         </form>

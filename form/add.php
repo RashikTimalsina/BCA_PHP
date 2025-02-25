@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'bca');  // Updated password to an empty string
+$conn = mysqli_connect('localhost', 'root', '', 'bca'); 
 
 if (!$conn) {
     die("Database connected failed: " . mysqli_connect_error());

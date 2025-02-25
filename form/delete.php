@@ -1,24 +1,29 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'bca');  // Updated password to an empty string
+$conn = mysqli_connect('localhost', 'root', '', 'bca');  
 
 if (!$conn) {
     die("Database connection failed: " . mysqli_connect_error());
 }
 
+
 // Checking if the student ID is provided in the URL
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+
 
     // Fetching the existing student record from the database
     $sql = "SELECT * FROM students WHERE id = $id";
     $result = mysqli_query($conn, $sql);
 
+
+
     // Checking if the student record exists
     if (mysqli_num_rows($result) > 0) {
-        $student = mysqli_fetch_assoc($result); // Fetch the student record
+        $student = mysqli_fetch_assoc($result);      // Fetch the student record
     } else {
-        die("Student not found."); // Stop execution if the student is not found
+        die("Student not found.");               // Stop execution if the student is not found
     }
+
 
     // Deleting the student record when 'Delete' button is clicked
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -27,7 +32,7 @@ if (isset($_GET['id'])) {
 
         if ($deleteResult) {
             echo "Record deleted successfully!";
-            header("Location: student.php");    // redirect to student.php after deleting the record
+            header("Location: student.php");      // redirect to student.php after deleting the record
             exit();
         } else {
             echo "Error deleting record: " . mysqli_error($conn);
@@ -57,9 +62,9 @@ if (isset($_GET['id'])) {
                 <th>Address</th>
             </tr>
             <tr>
-                <td><?php echo htmlspecialchars($student['name']); ?></td>
-                <td><?php echo htmlspecialchars($student['email']); ?></td>
-                <td><?php echo htmlspecialchars($student['address']); ?></td>
+                <td><?php echo htmlentities($student['name']); ?></td>
+                <td><?php echo htmlentities($student['email']); ?></td>
+                <td><?php echo htmlentities($student['address']); ?></td>
             </tr>
         </table>
         <form action="" method="post"><br>
